@@ -18,7 +18,7 @@ router.post("/", function(req, res, next) {
 })
 
 router.post('/kz', function(req, res, next) {
-  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjUwMTQ4MDczLCJwaG9uZSI6IjU0NDA0IiwicGFzc3dvcmQiOiIkMmEkMTAkQzN3alFsUnIxYVBOaWRMWElUVEk4T2hjTnI1TTJuOVpRcmdtZndINmN2SnVhLnA2bVNNOGkiLCJpc0JvdCI6dHJ1ZSwiY291bnRyeSI6dHJ1ZSwiaWF0IjoxNDk4MDI3Njc3fQ.ZrBcJyPkMo9AKwAY7cIMR0XETlQ7wFUli1QiW0d8zKs';
+  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjUwMTQ4MDczLCJwaG9uZSI6IjU0NDA0IiwicGFzc3dvcmQiOiIkMmEkMTAkQzN3alFsUnIxYVBOaWRMWElUVEk4T2hjTnI1TTJuOVpRcmdtZndINmN2SnVhLnA2bVNNOGkiLCJpc0JvdCI6dHJ1ZSwiY291bnRyeSI6dHJ1ZSwiaWF0IjoxNDk4MDMwOTUwfQ.eD3Df25g9LB4uj7wbYpqUpArIP0xJ4bpwBzcs27rv6s';
   eventControl(req, res, token);
 })
 
@@ -95,7 +95,9 @@ var eventControl = function(req, res, token) {
         }
         else {
           console.log(errMessage);
-          sms(errMessage, chatId, ip, token);
+          sms(errMessage, chatId, ip, token, function(err, res, body) {
+            console.log(body);
+          });
         }
      })
     }
