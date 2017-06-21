@@ -38,7 +38,7 @@ var eventControl = function(req, res, token) {
       let userId = req.body.data.id;
       db.create({userId: userId, ip: ip}).then(function(user) {
         console.log("user follows");
-        newChat(userId, ip, function(err, res, body) {
+        newChat(userId, ip, token, function(err, res, body) {
           let chatId = body.data.id;
           let message = "Здравствуйте!Я буду присылать вам самые свежие анекдоты." + commandMessage(user);
           sms(message, chatId, ip, token);
