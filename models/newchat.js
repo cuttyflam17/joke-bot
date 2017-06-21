@@ -5,7 +5,7 @@ module.exports=function(userId, ip, token, callback)
 {
   var token;
   var data = {
-  url: url,
+  url: config.url + '/chats/create',
   method:"POST",
   headers: {
 			'X-Namba-Auth-Token': token

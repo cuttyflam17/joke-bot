@@ -4,7 +4,7 @@ var request=require("request");
 module.exports=function(message, chatId, ip, token, callback){
 	var token;
 	var data={
-	url: url + chatId + "/write",
+	url: config.url + '/' + chatId + "/write",
 	method:"POST",
 	headers:{
 		'X-Namba-Auth-Token': token
