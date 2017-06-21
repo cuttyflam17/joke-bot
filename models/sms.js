@@ -2,7 +2,6 @@ var config = require('../config.js');
 var request=require("request");
 
 module.exports=function(message, chatId, ip, token, callback){
-	var token;
 	var data={
 	url: config.url + '/' + chatId + "/write",
 	method:"POST",

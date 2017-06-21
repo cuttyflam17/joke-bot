@@ -47,7 +47,7 @@ var eventControl = function(req, res, token) {
     }
     if(event == "message/new") {
       var userId = req.body.data.sender_id;
-      db.find({where: {userId: userId, ip: ip}})
+      db.findOne({where: {userId: userId, ip: ip}})
       .then(function(user) {
         var errMessage = "Некорректный ввод." + commandMessage(user);
         var content = req.body.data.content;

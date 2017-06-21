@@ -3,7 +3,6 @@ var config = require('../config.js');
 
 module.exports=function(userId, ip, token, callback)
 {
-  var token;
   var data = {
   url: config.url + '/chats/create',
   method:"POST",
