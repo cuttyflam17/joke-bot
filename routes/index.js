@@ -22,7 +22,7 @@ router.post('/kz', function(req, res, next) {
   eventControl(req, res, token);
 })
 
-var eventControl = function(res, req, token) {
+var eventControl = function(req, res, token) {
   var ip = req.connection.remoteAddress;
     var event = req.body.event;
     var commandMessage = function(user) {
