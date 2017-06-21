@@ -1,16 +1,8 @@
 var config = require('../config.js');
 var request=require("request");
 
-module.exports=function(message, chatId, ip, callback){
+module.exports=function(message, chatId, ip, token, callback){
 	var token;
-  if(ip === "::ffff:77.235.20.133") {
-    url = "http://77.235.20.133:3000/chats/",
-    token = config.token.staging;
-  }
-  else {
-    url = "https://api.namba1.co/chats/";
-    token = config.token.production;
-  }
 	var data={
 	url: url + chatId + "/write",
 	method:"POST",
