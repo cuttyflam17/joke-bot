@@ -30,13 +30,13 @@ var eventControl = function(req, res, token) {
     }
     if(event == "user/unfollow") {
       let userId = req.body.data.id;
-      db.destroy({where:{userId: userId, ip: ip}}).then(function(err) {
+      db.destroy({where: {userId: userId, ip: ip}}).then(function(err) {
         console.log("db destroyed");
       });
     }
     if(event == "user/follow") {
       let userId = req.body.data.id;
-      db.create({userId: userId, ip: ip}).then(function(user) {
+      db.create({userId: userId, ip: ip, token: token}).then(function(user) {
         console.log("user follows");
         newChat(userId, ip, token, function(err, res, body) {
           let chatId = body.data.id;
@@ -70,7 +70,7 @@ var eventControl = function(req, res, token) {
         }
         else if(content == "2") {
           parse.getJokes(function(result) {
-            sms(result, chatId, ip, function() {
+            sms(result, chatId, ip, token, function() {
               setTimeout(function() {
                 sms("Хотите ли еще получить свежий анекдот?"+commandMessage(user), chatId, ip, token);
               }, 1000);

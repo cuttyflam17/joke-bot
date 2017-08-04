@@ -15,7 +15,8 @@ var user = sequelize.define("user", {
 	state: {
 		type: Sequelize.BOOLEAN,
 	    defaultValue: true
-	}
+	},
+	token: Sequelize.STRING
 })
 
 user.sync().then(function() {});
