@@ -70,7 +70,7 @@ setInterval(function() {
           if(body.data) {
             var chatId = body.data.id;
           } 
-          sms(output, chatId, ip, function() {
+          sms(output, chatId, ip, result.token, function() {
             callback();
           });
         })
