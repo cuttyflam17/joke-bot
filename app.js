@@ -61,20 +61,22 @@ app.use(function(err, req, res, next) {
 });
 setInterval(function() {
   db.findAll({where: {state: true }}).then(function(results) {
-    async.each(results, function(result,callback){
-      parse.getRandomJoke(function(output) {
-        var userId = result.userId;
-        var ip = result.ip;
-        console.log(result);
-        newChat(userId, ip, function(err, res, body) {
-          if(body.data) {
-            var chatId = body.data.id;
-          } 
-          sms(output, chatId, ip, result.token, function() {
-            callback();
-          });
+    async.eachSeries(results, function(result,callback) {
+      setTimeout(function() {
+        parse.getRandomJoke(function(output) {
+          var userId = result.userId;
+          var ip = result.ip;
+          console.log(result);
+          newChat(userId, ip, result.token, function(err, res, body) {
+            if(body.data) {
+              var chatId = body.data.id;
+            } 
+            sms(output, chatId, ip, result.token, function() {
+              callback();
+            });
+          })
         })
-      })
+      }, 3000);
     })
   });
 
