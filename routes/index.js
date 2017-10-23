@@ -26,7 +26,7 @@ var eventControl = function(req, res, token) {
   var ip = req.connection.remoteAddress;
     var event = req.body.event;
     var commandMessage = function(user) {
-      return " Введите нужную цифру:\n1⃣Получить случайный анекдот.\n2⃣Получить 10 случайных анекдотов.\n3⃣"+(user.state ? "Отключить" : "Включить")+" ежедневную рассылку.";
+      return " Для получения свежих анекдотов, введите нужную цифру:\n1⃣Получить случайный анекдот.\n2⃣Получить 10 случайных анекдотов.\n3⃣"+(user.state ? "Отключить" : "Включить")+" ежедневную рассылку.";
     }
     if(event == "user/unfollow") {
       let userId = req.body.data.id;
@@ -40,7 +40,7 @@ var eventControl = function(req, res, token) {
         console.log("user follows");
         newChat(userId, ip, token, function(err, res, body) {
           let chatId = body.data.id;
-          let message = "Здравствуйте!Я буду присылать вам самые свежие анекдоты." + commandMessage(user);
+          let message = "Здравствуйте!" + commandMessage(user);
           sms(message, chatId, ip, token);
         })
       });
@@ -57,7 +57,7 @@ var eventControl = function(req, res, token) {
           sms(errMessage, chatId, ip, token);
           return;
         }
-        
+
         if(content == "1") {
          parse.getRandomJoke(function(result) {
           console.log(result);
@@ -83,7 +83,7 @@ var eventControl = function(req, res, token) {
             if(user.state) {
               db.update({state: false}, {where: {userId: userId, ip: ip}}).then(function(user) {
                 let message = "Вы отключили ежедневную рассылку."+commandMessage(user);
-                sms(message, chatId, ip, token);    
+                sms(message, chatId, ip, token);
               })
             } else {
               db.update({state: true}, {where: {userId: userId, ip: ip}}).then(function(user) {
